@@ -1,0 +1,145 @@
+﻿@model ExamTypeVM
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .table th {
+        font-weight: 600;
+    }
+
+    .btn {
+        border-radius: 6px;
+    }
+</style>
+
+<div class="container-fluid mt-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h4 class="fw-bold mb-0">ADD EXAM TYPE</h4>
+            <small class="text-muted">Dashboard / Exam Type / Add Exam Type</small>
+        </div>
+
+        <a href="/ExamType/Index" class="btn btn-primary px-4">BACK</a>
+    </div>
+
+    <!-- CARD -->
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                <!-- TITLE -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+                    <input name="Title" class="form-control" placeholder="Enter Title" required />
+                </div>
+
+                <!-- CHECKBOX ROW -->
+                <div class="mb-3 d-flex flex-wrap gap-3">
+
+                    <label><input type="checkbox" name="IsLead" /> Is Lead ?</label>
+                    <label><input type="checkbox" name="IsInquiry" /> Is Inquiry ?</label>
+                    <label><input type="checkbox" name="IsRegistration" /> Is Registration ?</label>
+                    <label><input type="checkbox" name="IsCoaching" /> Is Coaching ?</label>
+                    <label><input type="checkbox" name="IsProcess" /> Is Process ?</label>
+                    <label><input type="checkbox" name="IsMock" /> Is Mock ?</label>
+                    <label><input type="checkbox" name="IsProfessional" /> Is Professional ?</label>
+                    <label><input type="checkbox" name="IsEnglishTest" /> Is English Test ?</label>
+
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Description</label>
+                    <textarea name="Description" class="form-control" placeholder="Enter Description"></textarea>
+                </div>
+
+                <!-- GRADE INPUT -->
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Grade Title <span class="text-danger">*</span></label>
+
+                    <div class="d-flex gap-2">
+                        <input id="gradeInput" class="form-control" placeholder="Enter Grade Title" />
+                        <button type="button" class="btn btn-primary px-4" onclick="addGrade()">ADD</button>
+                    </div>
+                </div>
+
+                <!-- GRADE TABLE -->
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered text-center" id="gradeTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Grade Title</th>
+                                <th width="150">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!-- HIDDEN -->
+                <input type="hidden" name="GradeTitles" id="GradeTitles" />
+
+                <!-- BUTTONS -->
+                <div class="mt-3 d-flex gap-2">
+
+                    <button type="submit" class="btn btn-primary px-4">Save</button>
+
+                    <button type="submit" name="saveAdd" value="1" class="btn btn-success px-4">
+                        Save & Add Another
+                    </button>
+
+                    <a href="/ExamType/Index" class="btn btn-danger px-4">Cancel</a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+    let grades = [];
+
+    function addGrade() {
+        let val = document.getElementById("gradeInput").value.trim();
+
+        if (val === "") return;
+
+        grades.push(val);
+        render();
+    }
+
+    function removeGrade(index) {
+        grades.splice(index, 1);
+        render();
+    }
+
+    function render() {
+
+        let rows = "";
+
+        grades.forEach((g, i) => {
+            rows += `
+                <tr>
+                    <td>${g}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger btn-sm"
+                            onclick="removeGrade(${i})">
+                            Remove
+                        </button>
+                    </td>
+                </tr>`;
+        });
+
+        document.querySelector("#gradeTable tbody").innerHTML = rows;
+        document.getElementById("GradeTitles").value = grades.join(",");
+        document.getElementById("gradeInput").value = "";
+    }
+</script>

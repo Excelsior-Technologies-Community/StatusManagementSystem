@@ -1,0 +1,279 @@
+﻿@model ExamScheduleVM
+
+<div class="container-fluid mt-3">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h5 class="fw-bold mb-1">ADD SCHEDULE EXAMINATION</h5>
+            <small class="text-muted">Dashboard / Schedule Examination / Add Schedule Examination</small>
+        </div>
+
+        <a href="/ExamSchedule/Index" class="btn btn-sm btn-primary px-3">BACK</a>
+    </div>
+
+    <!-- CARD -->
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                <!-- TOP FIELDS -->
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">Exam Type *</label>
+                        @Html.DropDownListFor(x => x.ExamTypeId, Model.ExamTypeList, "Select Exam Type",
+                        new { @class = "form-select", id = "ExamTypeId" })
+                    </div>
+
+                    <div class="col-md-8 mb-3">
+                        <label class="form-label fw-semibold">Title *</label>
+                        <input asp-for="Title" class="form-control" placeholder="Enter Title" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label fw-semibold">Result Date *</label>
+                        <input type="date" asp-for="ResultDate" class="form-control" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <!-- EXAM DETAIL -->
+                <h6 class="fw-bold mb-3">Exam Detail</h6>
+
+                <div class="row align-items-end">
+
+                    <input type="hidden" id="ExamDetailsJson" name="ExamDetailsJson" />
+
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label fw-semibold">Exam Provider *</label>
+                        <select id="ProviderId" name="ProviderId" class="form-select"></select>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label fw-semibold">Exam Center</label>
+                        <select id="CenterId" name="CenterId" class="form-select"></select>
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label fw-semibold">Exam Date *</label>
+                        <input type="date" asp-for="ExamDate" class="form-control" />
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label fw-semibold">From Time</label>
+                        <input type="time" asp-for="ExamFromTime" class="form-control" />
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label fw-semibold">To Time</label>
+                        <input type="time" asp-for="ExamToTime" class="form-control" />
+                    </div>
+
+                </div>
+
+                <!-- ADD BUTTON -->
+                <div class="text-end mb-3">
+                    <button type="button" class="btn btn-primary btn-sm px-3">Add</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3">Cancel</button>
+                </div>
+
+                <!-- TABLE -->
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Exam Provider</th>
+                                <th>Exam Center</th>
+                                <th>Exam Date</th>
+                                <th>From Time</th>
+                                <th>To Time</th>
+                                <th width="80">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examTable">
+                            <!-- dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="mt-3">
+                    <button class="btn btn-primary btn-sm px-3">Save</button>
+                    <button class="btn btn-success btn-sm px-3">Save & Add Another</button>
+                    <a href="/ExamSchedule/Index" class="btn btn-danger btn-sm px-3">Cancel</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- STYLE (IMPORTANT FOR PIXEL MATCH) -->
+<style>
+    .form-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    .form-control, .form-select {
+        height: 38px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+
+    .card {
+        background: #fff;
+    }
+
+    .table th {
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .table td {
+        font-size: 13px;
+    }
+
+    .btn {
+        border-radius: 6px;
+        font-size: 13px;
+    }
+
+    h5 {
+        font-size: 16px;
+    }
+</style>
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    let examDetails = [];
+
+    // ADD ROW
+    $('.btn-primary:contains("Add")').click(function () {
+
+        let providerText = $('#ProviderId option:selected').text();
+        let providerId = $('#ProviderId').val();
+
+        let centerText = $('#CenterId option:selected').text();
+           let centerId = $('#CenterId').val() || null;
+    let fromTime = $('input[name="ExamFromTime"]').val() || null;
+    let toTime = $('input[name="ExamToTime"]').val() || null;
+
+        let examDate = $('input[name="ExamDate"]').val();
+        
+
+        // VALIDATION
+        if (!providerId || providerId === "Select Provider") {
+            alert("Select Provider");
+            return;
+        }
+
+        if (!examDate) {
+            alert("Select Exam Date");
+            return;
+        }
+
+        let obj = {
+            providerId,
+            providerText,
+            centerId,
+            centerText,
+            examDate,
+            fromTime,
+            toTime
+        };
+
+        examDetails.push(obj);
+        renderTable();
+
+        // RESET FIELDS
+        $('#ProviderId').val('');
+        $('#CenterId').val('');
+        $('input[name="ExamDate"]').val('');
+        $('input[name="ExamFromTime"]').val('');
+        $('input[name="ExamToTime"]').val('');
+    });
+
+    // RENDER TABLE
+    function renderTable() {
+
+        let html = "";
+
+        examDetails.forEach((item, index) => {
+            html += `
+                <tr>
+                    <td>${item.providerText}</td>
+                    <td>${item.centerText}</td>
+                    <td>${item.examDate}</td>
+                    <td>${item.fromTime}</td>
+                    <td>${item.toTime}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteRow(${index})">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        $('#examTable').html(html);
+
+        // STORE JSON
+        $('#ExamDetailsJson').val(JSON.stringify(examDetails));
+    }
+
+    // DELETE ROW
+    function deleteRow(index) {
+        examDetails.splice(index, 1);
+        renderTable();
+    }
+
+
+    // EXAM TYPE → PROVIDER
+    $('#ExamTypeId').change(function () {
+
+        let examTypeId = $(this).val();
+
+        $('#ProviderId').html('<option>Loading...</option>');
+        $('#CenterId').html('<option>Select Center</option>');
+
+        $.get('/ExamSchedule/GetProvidersByExamType',
+            { examTypeId: examTypeId },
+            function (data) {
+
+                $('#ProviderId').empty().append('<option>Select Provider</option>');
+
+                $.each(data, function (i, v) {
+                    $('#ProviderId').append(`<option value="${v.value}">${v.text}</option>`);
+                });
+            });
+    });
+
+    // PROVIDER → CENTER
+    $('#ProviderId').change(function () {
+
+        let providerId = $(this).val();
+
+        $('#CenterId').html('<option>Loading...</option>');
+
+        $.get('/ExamSchedule/GetCentersByProvider',
+            { providerId: providerId },
+            function (data) {
+
+                $('#CenterId').empty().append('<option>Select Center</option>');
+
+                $.each(data, function (i, v) {
+                    $('#CenterId').append(`<option value="${v.value}">${v.text}</option>`);
+                });
+            });
+    });
+</script>

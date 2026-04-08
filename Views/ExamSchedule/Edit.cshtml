@@ -1,0 +1,178 @@
+﻿@model ExamScheduleVM
+
+<div class="container-fluid mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <h4 class="fw-bold">EDIT SCHEDULE EXAMINATION</h4>
+            <small class="text-muted">Dashboard / Schedule Examination / Edit Schedule Examination</small>
+        </div>
+        <a href="/ExamSchedule/Index" class="btn btn-primary">BACK</a>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" id="ExamDetailsJson" name="ExamDetailsJson" />
+
+                <!-- TOP -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Exam Type *</label>
+                        @Html.DropDownListFor(x => x.ExamTypeId, Model.ExamTypeList, "", new { @class = "form-control", id = "ExamTypeId" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Title *</label>
+                        <input asp-for="Title" class="form-control" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Result Date *</label>
+                        <input type="date" asp-for="ResultDate" class="form-control" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <h5 class="fw-bold">Exam Detail</h5>
+
+                <!-- INPUT ROW -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Exam Provider *</label>
+                        <select id="ProviderId" class="form-control"></select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Exam Center *</label>
+                        <select id="CenterId" class="form-control"></select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>Exam Date *</label>
+                        <input type="date" id="ExamDate" class="form-control" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>From Time *</label>
+                        <input type="time" id="FromTime" class="form-control" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>To Time *</label>
+                        <input type="time" id="ToTime" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="addRow()">Add</button>
+                    <button type="button" class="btn btn-secondary btn-sm">Cancel</button>
+                </div>
+
+                <!-- TABLE -->
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th>Exam Provider</th>
+                            <th>Exam Center</th>
+                            <th>Exam Date</th>
+                            <th>From Time</th>
+                            <th>To Time</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailTable"></tbody>
+                </table>
+
+                <button class="btn btn-primary">Update</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var existingDetails = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ExamDetails));
+
+    let details = [];
+
+    // LOAD EXISTING DATA
+    $(document).ready(function () {
+
+        if (existingDetails && existingDetails.length > 0) {
+
+            existingDetails.forEach(d => {
+                details.push({
+                    providerId: d.ProviderId,
+                    providerText: d.ProviderName,
+                    centerId: d.CenterId,
+                    centerText: d.CenterName,
+                    examDate: formatDate(d.ExamDate),
+                    fromTime: formatTime(d.FromTime),
+                    toTime: formatTime(d.ToTime)
+                });
+            });
+
+            render();
+        }
+    });
+
+    // FORMAT DATE
+    function formatDate(date) {
+        let d = new Date(date);
+        return d.toISOString().split('T')[0];
+    }
+
+    // FORMAT TIME
+    function formatTime(time) {
+        return time.substring(0,5);
+    }
+
+    // ADD ROW
+    function addRow() {
+
+        let row = {
+            providerId: $('#ProviderId').val(),
+            providerText: $('#ProviderId option:selected').text(),
+            centerId: $('#CenterId').val(),
+            centerText: $('#CenterId option:selected').text(),
+            examDate: $('#ExamDate').val(),
+            fromTime: $('#FromTime').val(),
+            toTime: $('#ToTime').val()
+        };
+
+        details.push(row);
+        render();
+    }
+
+    // REMOVE
+    function removeRow(i) {
+        details.splice(i, 1);
+        render();
+    }
+
+    // RENDER TABLE
+    function render() {
+
+        let html = '';
+
+        details.forEach((d, i) => {
+            html += `<tr>
+                <td>${d.providerText}</td>
+                <td>${d.centerText}</td>
+                <td>${d.examDate}</td>
+                <td>${d.fromTime}</td>
+                <td>${d.toTime}</td>
+                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(${i})">Remove</button></td>
+            </tr>`;
+        });
+
+        $('#detailTable').html(html);
+        $('#ExamDetailsJson').val(JSON.stringify(details));
+    }
+</script>

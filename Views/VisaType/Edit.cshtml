@@ -1,0 +1,34 @@
+﻿@model VisaTypeModel
+<style>
+    .form-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+</style>
+<h5>EDIT VISA TYPE</h5>
+<p class="text-muted">Dashboard / Visa Type / Edit Visa Type</p>
+
+<div class="form-card">
+
+    <form method="post">
+
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div class="mb-3">
+            <label>Title *</label>
+            <input type="text" name="Title" value="@Model.Title" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Description</label>
+            <textarea name="Description" class="form-control">@Model.Description</textarea>
+        </div>
+
+        <button class="btn btn-primary">Update</button>
+        <a href="/VisaType/Index" class="btn btn-secondary">Back</a>
+
+    </form>
+
+</div>

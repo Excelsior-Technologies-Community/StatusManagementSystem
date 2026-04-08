@@ -1,0 +1,166 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ASP.NET\\StatusManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|d:\\asp.net\\statusmanagementsystem\\controllers\\examschedulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|solutionrelative:controllers\\examschedulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|d:\\asp.net\\statusmanagementsystem\\models\\examdetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|solutionrelative:models\\examdetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|d:\\asp.net\\statusmanagementsystem\\models\\examschedulevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|solutionrelative:models\\examschedulevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|d:\\asp.net\\statusmanagementsystem\\views\\examschedule\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|solutionrelative:views\\examschedule\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|d:\\asp.net\\statusmanagementsystem\\views\\examschedule\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|solutionrelative:views\\examschedule\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|d:\\asp.net\\statusmanagementsystem\\views\\examschedule\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|solutionrelative:views\\examschedule\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|d:\\asp.net\\statusmanagementsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2420B54F-84A3-4B83-80F7-A91F80DCE3F7}|StatusManagementSystem.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 12,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExamDetailVM.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\StatusManagementSystem\\Models\\ExamDetailVM.cs",
+              "RelativeDocumentMoniker": "Models\\ExamDetailVM.cs",
+              "ToolTip": "D:\\ASP.NET\\StatusManagementSystem\\Models\\ExamDetailVM.cs",
+              "RelativeToolTip": "Models\\ExamDetailVM.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T06:37:06.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\StatusManagementSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\ASP.NET\\StatusManagementSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAEIAAACDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-07T12:57:43.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\StatusManagementSystem\\Views\\ExamSchedule\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\ExamSchedule\\Edit.cshtml",
+              "ToolTip": "D:\\ASP.NET\\StatusManagementSystem\\Views\\ExamSchedule\\Edit.cshtml",
+              "RelativeToolTip": "Views\\ExamSchedule\\Edit.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAswHQAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-07T12:57:25.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\StatusManagementSystem\\Views\\ExamSchedule\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\ExamSchedule\\Create.cshtml",
+              "ToolTip": "D:\\ASP.NET\\StatusManagementSystem\\Views\\ExamSchedule\\Create.cshtml",
+              "RelativeToolTip": "Views\\ExamSchedule\\Create.cshtml",
+              "ViewState": "AgIAAJoAAAAAAAAAAAAcwKwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-07T12:50:10.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\ASP.NET\\StatusManagementSystem\\Views\\ExamSchedule\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\ExamSchedule\\Index.cshtml",
+              "ToolTip": "D:\\ASP.NET\\StatusManagementSystem\\Views\\ExamSchedule\\Index.cshtml",
+              "RelativeToolTip": "Views\\ExamSchedule\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-07T12:49:42.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ExamScheduleController.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\StatusManagementSystem\\Controllers\\ExamScheduleController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ExamScheduleController.cs",
+              "ToolTip": "D:\\ASP.NET\\StatusManagementSystem\\Controllers\\ExamScheduleController.cs",
+              "RelativeToolTip": "Controllers\\ExamScheduleController.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAD4v4sAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:36:52.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExamScheduleVM.cs",
+              "DocumentMoniker": "D:\\ASP.NET\\StatusManagementSystem\\Models\\ExamScheduleVM.cs",
+              "RelativeDocumentMoniker": "Models\\ExamScheduleVM.cs",
+              "ToolTip": "D:\\ASP.NET\\StatusManagementSystem\\Models\\ExamScheduleVM.cs",
+              "RelativeToolTip": "Models\\ExamScheduleVM.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAswBEAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T11:54:22.804Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

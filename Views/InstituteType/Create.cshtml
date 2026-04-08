@@ -1,0 +1,43 @@
+﻿@model InstituteTypeModel
+
+<div class="container-fluid mt-3">
+
+    <div class="header-box d-flex justify-content-between">
+        <div>
+            <h5>ADD INSTITUTE TYPE</h5>
+            <small>Dashboard / Institute Type / Add Institute Type</small>
+        </div>
+
+    </div>
+
+    <div class="intake-card">
+
+        <form method="post">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Title *</label>
+                    <input name="Title" class="form-control" placeholder="Enter Title" />
+                </div>
+
+                <div class="col-md-6">
+                    <label>Short Name *</label>
+                    <input name="ShortName" class="form-control" placeholder="Enter Short Name" />
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <label>Description</label>
+                <textarea name="Description" class="form-control"></textarea>
+            </div>
+
+            <div class="mt-3">
+                <button name="submit" value="Save" class="btn btn-primary btn-sm">Save</button>
+                <button name="submit" value="SaveAdd" class="btn btn-success btn-sm">Save & Add Another</button>
+                <a href="/InstituteType/Index" class="btn btn-danger btn-sm">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>

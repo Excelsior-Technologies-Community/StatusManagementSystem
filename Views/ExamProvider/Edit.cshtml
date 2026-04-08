@@ -1,0 +1,55 @@
+﻿@model ExamProviderVM
+
+<div class="container-fluid mt-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <h4 class="fw-bold mb-0">EDIT EXAM PROVIDER</h4>
+            <small class="text-muted">Dashboard / Exam Provider / Edit Exam Provider</small>
+        </div>
+
+        <a href="/ExamProvider/Index" class="btn btn-primary px-4">BACK</a>
+    </div>
+
+    <!-- FORM -->
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+                        <label>Exam Type *</label>
+                        @Html.DropDownListFor(x => x.ExamTypeId, Model.ExamTypeList,
+                        new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Exam Provider *</label>
+                        <input name="Title" value="@Model.Title" class="form-control" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Website</label>
+                        <input name="Website" value="@Model.Website" class="form-control" />
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label>Description</label>
+                    <textarea name="Description" class="form-control">@Model.Description</textarea>
+                </div>
+
+                <button class="btn btn-primary px-4">Update</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

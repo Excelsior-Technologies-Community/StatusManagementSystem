@@ -1,0 +1,51 @@
+﻿@model DocumentModel
+
+<style>
+    .form-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+</style>
+
+<h5>EDIT DOCUMENT</h5>
+
+<div class="form-card">
+
+    <form method="post">
+
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+                <label>Document Type *</label>
+                <select name="DocumentTypeId" class="form-select">
+                    @foreach (var item in ViewBag.DocTypes)
+                    {
+                        <option value="@item.Value"
+                                selected="@(item.Value == Model.DocumentTypeId.ToString() ? "selected" : null)">
+                            @item.Text
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label>Title *</label>
+                <input type="text" name="Title" value="@Model.Title" class="form-control" />
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label>Description</label>
+            <textarea name="Description" class="form-control">@Model.Description</textarea>
+        </div>
+
+        <button class="btn btn-primary">Update</button>
+
+    </form>
+
+</div>

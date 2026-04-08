@@ -1,0 +1,45 @@
+﻿@model StatusManagementSystem.Models.StatusModel
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <h4 class="fw-bold">ADD STATUS</h4>
+            <small class="text-muted">Dashboard / Status / Add Status</small>
+        </div>
+
+        <a href="/Status/Index" class="btn btn-primary btn-sm">BACK</a>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4">
+
+        <form method="post">
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Code *</label>
+                    <input type="text" name="StatusCode" class="form-control" placeholder="Enter Code" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label>Title *</label>
+                    <input type="text" name="Title" class="form-control" placeholder="Enter Title" required />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="Description" class="form-control" placeholder="Enter Description"></textarea>
+            </div>
+
+            <div>
+                <button class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-success">Save & Add Another</button>
+                <a href="/Status/Index" class="btn btn-danger">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

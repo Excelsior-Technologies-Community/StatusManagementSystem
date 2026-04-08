@@ -1,0 +1,81 @@
+﻿@model List<CurrencyModel>
+
+<div class="container-fluid mt-3">
+
+    <div class="header-box d-flex justify-content-between align-items-center">
+        <div>
+            <h5 class="fw-bold">CURRENCY</h5>
+            <small class="text-muted">Dashboard / Currency</small>
+        </div>
+
+        <div>
+            <a href="/Currency/Create" class="btn btn-primary btn-sm">ADD</a>
+            <button class="btn btn-outline-primary btn-sm">Download</button>
+        </div>
+    </div>
+
+    <div class="header-box d-flex justify-content-between">
+        <h6>Currency List</h6>
+
+        <div class="d-flex">
+            <input type="text" class="form-control form-control-sm me-2" placeholder="search" />
+            <select class="form-select form-select-sm" style="width:80px;">
+                <option>50</option>
+            </select>
+        </div>
+    </div>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+
+        <div class="intake-card">
+
+            <div class="intake-title-box">@(i + 1)</div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="label-title">Title</div>
+                    <div class="value-text">@item.Title</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Country</div>
+                    <div class="value-text">@item.CountryName</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Description</div>
+                    <div class="value-text">@item.Description</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Status</div>
+                    <span class="@(item.StatusFlag == "Active" ? "text-success" : "text-danger") fw-bold">
+                        @(item.StatusFlag == "Active" ? "Active" : "Inactive")
+                    </span>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="d-flex gap-2">
+                <a href="/Currency/Edit/@item.ID" class="btn btn-edit btn-sm">✏ Edit</a>
+
+                @if (item.StatusFlag == "Active")
+                {
+                    <a href="/Currency/ChangeStatus?id=@item.ID&status=I"
+                       class="btn btn-outline-danger btn-sm">⛔ InActive</a>
+                }
+                else
+                {
+                    <a href="/Currency/ChangeStatus?id=@item.ID&status=A"
+                       class="btn btn-outline-success btn-sm">✔ Active</a>
+                }
+
+                <a href="/Currency/Delete/@item.ID" class="btn btn-delete btn-sm">🗑 Delete</a>
+            </div>
+
+        </div>
+    }
+</div>

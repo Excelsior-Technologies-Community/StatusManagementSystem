@@ -1,0 +1,75 @@
+﻿@model List<InstituteTypeModel>
+
+<div class="container-fluid mt-3">
+
+    <div class="header-box d-flex justify-content-between">
+        <div>
+            <h5 class="fw-bold">INSTITUTE TYPE</h5>
+            <small>Dashboard / Institute Type</small>
+        </div>
+
+        <div>
+            <a href="/InstituteType/Create" class="btn btn-primary btn-sm">ADD</a>
+            <button class="btn btn-outline-primary btn-sm">Download</button>
+        </div>
+    </div>
+
+    <div class="header-box d-flex justify-content-between">
+        <h6>Institute Type List</h6>
+        <input type="text" class="form-control form-control-sm" placeholder="search" style="width:200px;" />
+    </div>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+
+        <div class="intake-card">
+
+            <div class="intake-title-box">@(i + 1)</div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="label-title">Title</div>
+                    <div class="value-text">@item.Title</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Short Name</div>
+                    <div class="value-text">@item.ShortName</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Description</div>
+                    <div class="value-text">@item.Description</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Status</div>
+                    <span class="@(item.StatusFlag == "Active" ? "text-success" : "text-danger") fw-bold">
+                        @(item.StatusFlag == "Active" ? "Active" : "Inactive")
+                    </span>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="d-flex gap-2">
+                <a href="/InstituteType/Edit/@item.ID" class="btn btn-edit btn-sm">✏ Edit</a>
+
+                @if (item.StatusFlag == "Active")
+                {
+                    <a href="/InstituteType/ChangeStatus?id=@item.ID&status=I"
+                       class="btn btn-outline-danger btn-sm">⛔ InActive</a>
+                }
+                else
+                {
+                    <a href="/InstituteType/ChangeStatus?id=@item.ID&status=A"
+                       class="btn btn-outline-success btn-sm">✔ Active</a>
+                }
+
+                <a href="/InstituteType/Delete/@item.ID" class="btn btn-delete btn-sm">🗑 Delete</a>
+            </div>
+
+        </div>
+    }
+</div>

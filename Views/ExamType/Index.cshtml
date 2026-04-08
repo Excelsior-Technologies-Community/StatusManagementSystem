@@ -1,0 +1,197 @@
+﻿@model List<ExamTypeVM>
+
+<div class="container-fluid mt-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h4 class="fw-bold mb-0">EXAM TYPE</h4>
+            <small class="text-muted">Dashboard / Exam Type</small>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a href="/ExamType/Create" class="btn btn-primary px-4">ADD</a>
+            <button class="btn btn-outline-primary">Download</button>
+        </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="card shadow-sm border-0 mb-3 rounded-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+
+            <h6 class="mb-0 fw-semibold">Exam Type List</h6>
+
+            <div class="d-flex align-items-center gap-3">
+                <input type="text" id="searchBox" class="form-control" placeholder="search" style="width:220px;" />
+
+                <div>
+                    Show
+                    <select class="form-select d-inline w-auto">
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    entries
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- LIST -->
+    @foreach (var item in Model)
+    {
+        <div class="card shadow-sm border-0 mb-4 rounded-3 exam-card">
+
+            <div class="card-body">
+
+                <!-- TOP -->
+                <div class="d-flex justify-content-between align-items-start">
+
+                    <div>
+                        <span class="badge bg-light border text-dark px-3 py-2">@item.Id</span>
+
+                        <div class="mt-3">
+                            <small class="text-muted d-block">Title</small>
+                            <h6 class="fw-semibold mb-0">@item.Title</h6>
+                        </div>
+                    </div>
+
+                   
+
+                </div>
+
+                <hr />
+
+                <!-- FLAGS -->
+                <div class="row text-center">
+
+                    <div class="col-md-3">
+                        <small>Is Lead ?</small><br />
+                        <b>@(item.IsLead ? "Yes" : "No")</b>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small>Is Inquiry ?</small><br />
+                        <b>@(item.IsInquiry ? "Yes" : "No")</b>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small>Is Registration ?</small><br />
+                        <b>@(item.IsRegistration ? "Yes" : "No")</b>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small>Is Coaching ?</small><br />
+                        <b>@(item.IsCoaching ? "Yes" : "No")</b>
+                    </div>
+
+                </div>
+
+                <div class="row text-center mt-3">
+
+                    <div class="col-md-3">
+                        <small>Is Process ?</small><br />
+                        <b>@(item.IsProcess ? "Yes" : "No")</b>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small>Is Mock ?</small><br />
+                        <b>@(item.IsMock ? "Yes" : "No")</b>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small>Is Professional ?</small><br />
+                        <b>@(item.IsProfessional ? "Yes" : "No")</b>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small>Is English Test ?</small><br />
+                        <b>@(item.IsEnglishTest ? "Yes" : "No")</b>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <!-- STATUS + DESCRIPTION -->
+                <div class="row align-items-start">
+
+                    <div class="col-md-3">
+                        <small class="text-muted d-block">Status</small>
+
+                        <span class="fw-semibold @(item.StatusFlag == "Active" ? "text-success" : "text-danger")">
+                            @(item.StatusFlag == "Active" ? "Active" : "Inactive")
+                        </span>
+                    </div>
+
+                    <div class="col-md-9">
+                        <small class="text-muted d-block">Description</small>
+                        <div class="fw-normal">@item.Description</div>
+                    </div>
+
+                </div>
+
+                <!-- ACTION -->
+                <div class="mt-3 d-flex gap-2">
+
+                    <a href="/ExamType/Edit/@item.Id" class="btn btn-outline-primary btn-sm">
+                        ✏ Edit
+                    </a>
+
+                    @if (item.StatusFlag == "Active")
+                    {
+                        <a href="/ExamType/ToggleStatus/@item.Id"
+                           class="btn btn-outline-danger btn-sm">
+                            ⛔ InActive
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/ExamType/ToggleStatus/@item.Id"
+                           class="btn btn-outline-success btn-sm">
+                            ✔ Active
+                        </a>
+                    }
+
+                    <a href="/ExamType/Delete/@item.Id" class="btn btn-outline-danger btn-sm">
+                        🗑 Delete
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>
+
+<!-- STYLE -->
+<style>
+    .exam-card {
+        border-radius: 12px;
+    }
+
+        .exam-card:hover {
+            transform: scale(1.01);
+            transition: 0.2s ease;
+        }
+
+    .filter-btn {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+</style>
+
+<!-- SEARCH -->
+<script>
+    document.getElementById("searchBox").addEventListener("keyup", function () {
+
+        let val = this.value.toLowerCase();
+        let cards = document.querySelectorAll(".exam-card");
+
+        cards.forEach(c => {
+            c.style.display = c.innerText.toLowerCase().includes(val) ? "" : "none";
+        });
+    });
+</script>

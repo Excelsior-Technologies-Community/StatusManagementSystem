@@ -1,0 +1,59 @@
+﻿@model ExamProviderVM
+
+<div class="container-fluid mt-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            <h4 class="fw-bold mb-0">ADD EXAM PROVIDER</h4>
+            <small class="text-muted">Dashboard / Exam Provider / Add Exam Provider</small>
+        </div>
+
+        <a href="/ExamProvider/Index" class="btn btn-primary px-4">BACK</a>
+    </div>
+
+    <!-- FORM -->
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+                        <label>Exam Type *</label>
+                        @Html.DropDownListFor(x => x.ExamTypeId, Model.ExamTypeList,
+                        "Select Exam Type", new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Exam Provider *</label>
+                        <input name="Title" class="form-control" placeholder="Enter Exam Provider" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label>Website</label>
+                        <input name="Website" class="form-control" placeholder="Enter Website" />
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label>Description</label>
+                    <textarea name="Description" class="form-control" placeholder="Enter Description"></textarea>
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button class="btn btn-primary px-4">Save</button>
+                    <button class="btn btn-success px-4">Save & Add Another</button>
+                    <a href="/ExamProvider/Index" class="btn btn-danger px-4">Cancel</a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

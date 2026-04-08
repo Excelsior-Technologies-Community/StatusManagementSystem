@@ -1,0 +1,133 @@
+﻿@model ExamTypeVM
+
+<div class="container-fluid mt-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h4 class="fw-bold mb-0">EDIT EXAM TYPE</h4>
+            <small class="text-muted">Dashboard / Exam Type / Edit Exam Type</small>
+        </div>
+
+        <a href="/ExamType/Index" class="btn btn-primary px-4">BACK</a>
+    </div>
+
+    <!-- CARD -->
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body p-4">
+
+            <form method="post">
+
+                <!-- HIDDEN ID -->
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <!-- TITLE -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+                    <input name="Title" class="form-control" value="@Model.Title" required />
+                </div>
+
+                <!-- CHECKBOX ROW -->
+                <div class="mb-3 d-flex flex-wrap gap-3">
+
+                    <label><input type="checkbox" name="IsLead" @(Model.IsLead ? "checked" : "") /> Is Lead ?</label>
+                    <label><input type="checkbox" name="IsInquiry" @(Model.IsInquiry ? "checked" : "") /> Is Inquiry ?</label>
+                    <label><input type="checkbox" name="IsRegistration" @(Model.IsRegistration ? "checked" : "") /> Is Registration ?</label>
+                    <label><input type="checkbox" name="IsCoaching" @(Model.IsCoaching ? "checked" : "") /> Is Coaching ?</label>
+                    <label><input type="checkbox" name="IsProcess" @(Model.IsProcess ? "checked" : "") /> Is Process ?</label>
+                    <label><input type="checkbox" name="IsMock" @(Model.IsMock ? "checked" : "") /> Is Mock ?</label>
+                    <label><input type="checkbox" name="IsProfessional" @(Model.IsProfessional ? "checked" : "") /> Is Professional ?</label>
+                    <label><input type="checkbox" name="IsEnglishTest" @(Model.IsEnglishTest ? "checked" : "") /> Is English Test ?</label>
+
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Description</label>
+                    <textarea name="Description" class="form-control">@Model.Description</textarea>
+                </div>
+
+                <!-- GRADE INPUT -->
+                <div class="mb-2">
+                    <label class="form-label fw-semibold">Grade Title <span class="text-danger">*</span></label>
+
+                    <div class="d-flex gap-2">
+                        <input id="gradeInput" class="form-control" placeholder="Enter Grade Title" />
+                        <button type="button" class="btn btn-primary px-4" onclick="addGrade()">ADD</button>
+                    </div>
+                </div>
+
+                <!-- GRADE TABLE -->
+                <div class="table-responsive mt-3">
+                    <table class="table table-bordered text-center" id="gradeTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Grade Title</th>
+                                <th width="150">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!-- HIDDEN -->
+                <input type="hidden" name="GradeTitles" id="GradeTitles" />
+
+                <!-- BUTTONS -->
+                <div class="mt-3 d-flex gap-2">
+
+                    <button type="submit" class="btn btn-primary px-4">Update</button>
+
+                    <a href="/ExamType/Index" class="btn btn-danger px-4">Cancel</a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+    // 🔥 IMPORTANT: preload existing grades
+    let grades = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.GradeList));
+
+    function addGrade() {
+        let val = document.getElementById("gradeInput").value.trim();
+
+        if (val === "") return;
+
+        grades.push(val);
+        render();
+    }
+
+    function removeGrade(index) {
+        grades.splice(index, 1);
+        render();
+    }
+
+    function render() {
+
+        let rows = "";
+
+        grades.forEach((g, i) => {
+            rows += `
+                <tr>
+                    <td>${g}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger btn-sm"
+                            onclick="removeGrade(${i})">
+                            Remove
+                        </button>
+                    </td>
+                </tr>`;
+        });
+
+        document.querySelector("#gradeTable tbody").innerHTML = rows;
+        document.getElementById("GradeTitles").value = grades.join(",");
+    }
+
+    // Initial render
+    render();
+</script>

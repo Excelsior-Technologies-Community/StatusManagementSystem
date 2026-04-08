@@ -1,0 +1,89 @@
+﻿@model List<InstituteModel>
+
+<div class="container-fluid mt-3">
+
+    <div class="header-box d-flex justify-content-between">
+        <div>
+            <h5>INSTITUTE</h5>
+            <small>Dashboard / Institute</small>
+        </div>
+
+        <div>
+            <a href="/Institute/Create" class="btn btn-primary btn-sm">ADD</a>
+            <button class="btn btn-outline-primary btn-sm">Download</button>
+        </div>
+    </div>
+
+    <div class="header-box">
+        <h6>Institute List</h6>
+    </div>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var item = Model[i];
+
+        <div class="intake-card">
+
+            <div class="intake-title-box">@(i + 1)</div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="label-title">Institute Type</div>
+                    <div class="value-text">@item.InstituteTypeName</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Institute Name & Code</div>
+                    <div class="value-text">@item.InstituteName (@item.Institutecode)</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Contact No.</div>
+                    <div class="value-text">@item.ContactNumber</div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="label-title">Email</div>
+                    <div class="value-text">@item.Email</div>
+                </div>
+
+                <div class="col-md-3 mt-3">
+                    <div class="label-title">Country</div>
+                    <div class="value-text">@item.CountryName</div>
+                </div>
+
+                <div class="col-md-3 mt-3">
+                    <div class="label-title">State</div>
+                    <div class="value-text">@item.StateName</div>
+                </div>
+
+                <div class="col-md-3 mt-3">
+                    <div class="label-title">Status</div>
+                    <span class="@(item.StatusFlag == "Active" ? "text-success" : "text-danger") fw-bold">
+                        @(item.StatusFlag == "Active" ? "Active" : "Inactive")
+                    </span>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="d-flex gap-2">
+                <a href="/Institute/Edit/@item.ID" class="btn btn-edit btn-sm">✏ Edit</a>
+
+                @if (item.StatusFlag == "Active")
+                {
+                    <a href="/Institute/ChangeStatus?id=@item.ID&status=I"
+                       class="btn btn-outline-danger btn-sm">⛔ InActive</a>
+                }
+                else
+                {
+                    <a href="/Institute/ChangeStatus?id=@item.ID&status=A"
+                       class="btn btn-outline-success btn-sm">✔ Active</a>
+                }
+
+                <a href="/Institute/Delete/@item.ID" class="btn btn-delete btn-sm">🗑 Delete</a>
+            </div>
+
+        </div>
+    }
+</div>

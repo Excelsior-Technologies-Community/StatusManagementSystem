@@ -1,0 +1,197 @@
+﻿@model List<ServiceModel>
+
+<div class="container-fluid mt-3">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h5 class="fw-bold mb-0">SERVICE PACKAGE</h5>
+            <small class="text-muted">Dashboard / Service Package</small>
+        </div>
+
+        <div>
+            <a href="/ServicePackage/Create" class="btn btn-primary btn-sm">ADD</a>
+            <button class="btn btn-outline-primary btn-sm">Download</button>
+        </div>
+    </div>
+
+    <!-- TOP BAR -->
+    <div class="card p-3 mb-3 shadow-sm">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h6 class="fw-bold mb-0">Service Package List</h6>
+
+            <div class="d-flex gap-2">
+
+                <input type="text" class="form-control form-control-sm" placeholder="search" style="width:200px;" />
+
+                <div class="d-flex align-items-center">
+                    <span class="me-1">Show</span>
+                    <select class="form-select form-select-sm" style="width:70px;">
+                        <option>10</option>
+                        <option selected>50</option>
+                        <option>100</option>
+                    </select>
+                    <span class="ms-1">entries</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LIST -->
+    @foreach (var item in Model)
+    {
+        <div class="card mb-3 shadow-sm">
+
+            <div class="card-body">
+
+                <!-- NUMBER -->
+                <div class="mb-2">
+                    <span class="badge bg-light text-dark border">@item.ID</span>
+                </div>
+
+                <!-- TOP ROW -->
+                <div class="row mb-3">
+
+                    <div class="col-md-3">
+                        <small class="text-muted">Title</small>
+                        <div class="fw-semibold">@item.Title</div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small class="text-muted">Alias</small>
+                        <div class="fw-semibold">@item.Alias</div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small class="text-muted">Total Fees</small>
+                        <div class="fw-semibold">
+                            @(item.TotalFees == 0 ? "0" : item.TotalFees.ToString())
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <small class="text-muted">GST(%)</small>
+                        <div class="fw-semibold">@item.GSTName</div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <!-- BOOLEAN ROW -->
+                <div class="row mb-3">
+
+                    <div class="col-md-2">
+                        <small class="text-muted">Is Agreements Send?</small>
+                        <div class="fw-semibold">@(item.IsAgreementsSend == "Yes" ? "Yes" : "No")</div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <small class="text-muted">Is Receipt Send?</small>
+                        <div class="fw-semibold">@(item.IsReceiptSend == "Yes" ? "Yes" : "No")</div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <small class="text-muted">Is College Application Activities?</small>
+                        <div class="fw-semibold">@(item.IsCollegeApplicationActivities == "Yes" ? "Yes" : "No")</div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <small class="text-muted">Is Course Options?</small>
+                        <div class="fw-semibold">@(item.IsCourseOptions == "Yes" ? "Yes" : "No")</div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <small class="text-muted">Is Fees Payment?</small>
+                        <div class="fw-semibold">@(item.IsFeesPayment == "Yes" ? "Yes" : "No")</div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <small class="text-muted">Is Post Decision Activities?</small>
+                        <div class="fw-semibold">@(item.IsPostDecisionActivities == "Yes" ? "Yes" : "No")</div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <!-- BOTTOM ROW -->
+                <div class="row align-items-center">
+
+                    <div class="col-md-3">
+                        <small class="text-muted">Is Allied Services?</small>
+                        <div class="fw-semibold">@(item.IsAlliedServices == "Yes" ? "Yes" : "No")</div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="label">Status</div>
+                        <span class="@(item.StatusFlag == "Active" ? "text-success" : "text-danger") fw-bold">
+                            @(item.StatusFlag == "Active" ? "Active" : "Inactive")
+                        </span>
+                    </div>
+
+                    <div class="col-md-7">
+                        <small class="text-muted">Description</small>
+                        <div class="fw-semibold">@item.Description</div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <!-- ACTION BUTTONS -->
+                <div class="d-flex gap-2">
+                    <a href="/ServicePackage/Edit/@item.ID" class="btn btn-edit btn-sm">✏ Edit</a>
+
+                    @if (item.StatusFlag == "Active")
+                    {
+                        <a href="/ServicePackage/ToggleStatus?id=@item.ID&status=Inactive"
+                           class="btn btn-outline-danger btn-sm">⛔ InActive</a>
+                    }
+                    else
+                    {
+                        <a href="/ServicePackage/ToggleStatus?id=@item.ID&status=Active"
+                           class="btn btn-outline-success btn-sm">✔ Active</a>
+                    }
+
+                    <a href="/ServicePackage/Delete/@item.ID" class="btn btn-delete btn-sm">🗑 Delete</a>
+                    <!-- COPY -->
+                    <button class="btn btn-sm btn-outline-secondary">
+                        📄 Copy
+                    </button>
+                </div>
+
+                    
+
+                </div>
+
+            </div>
+
+        
+    }
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    
+    function deleteService(id) {
+
+        if (!confirm("Are you sure you want to DELETE this record?")) return;
+
+        $.post('/ServicePackage/Delete', { id: id }, function (res) {
+
+            if (res.success) {
+                location.reload();
+            }
+
+        });
+    }
+
+</script> 

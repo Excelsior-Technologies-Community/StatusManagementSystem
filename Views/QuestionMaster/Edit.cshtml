@@ -1,0 +1,55 @@
+﻿@model QuestionModel
+
+<style>
+    .form-card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+</style>
+
+<h3>EDIT QUESTION</h3>
+
+<div class="form-card">
+
+    <form method="post">
+
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div class="row mb-3">
+
+            <div class="col-md-5">
+                <label>Title *</label>
+                <input type="text" name="Title" value="@Model.Title" class="form-control" />
+            </div>
+
+            <div class="col-md-3">
+                <label>Answer Type *</label>
+                <select name="AnsType" class="form-control">
+                    <option selected>@Model.AnsType</option>
+                    <option>Text Box</option>
+                    <option>Text with Numerical Only</option>
+                    <option>File Upload</option>
+                    <option>Date</option>
+                    <option>Yes or No</option>
+                    <option>Drop-Down</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label>Select Master Name</label>
+                <select name="PageMasterId" class="form-control">
+                    <option value="">Select Master Name</option>
+                    <option value="1">Master 1</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/QuestionMaster/Index" class="btn btn-secondary">Back</a>
+
+    </form>
+
+</div>

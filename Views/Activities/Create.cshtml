@@ -1,0 +1,169 @@
+﻿@model StatusManagementSystem.Models.ActivityModel
+
+<div class="container-fluid mt-3">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h5 class="fw-bold mb-0">ADD ACTIVITIES</h5>
+            <small class="text-muted">Dashboard / Activities / Add Action Type</small>
+        </div>
+
+        <a href="/Activities/Index" class="btn btn-primary btn-sm">BACK</a>
+    </div>
+
+    <!-- CARD -->
+    <div class="card p-4 shadow-sm border-0">
+
+        <form method="post">
+
+            <!-- TITLE + CHECKBOX -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Title *</label>
+                    <input type="text" name="Title" class="form-control" placeholder="Enter Title" />
+                </div>
+
+                <div class="col-md-6 d-flex align-items-center mt-4">
+                    <input type="checkbox" name="InAppShow" value="Yes" class="form-check-input me-2" />
+                    <label>Is In App Visible ?</label>
+                </div>
+            </div>
+
+            <!-- ACTION TYPE SECTION -->
+            <h6 class="fw-bold mb-2">Action Type List</h6>
+            <hr />
+
+            <!-- INPUT ROW -->
+            <div class="row mb-3">
+
+                <div class="col-md-3">
+                    <label>Title *</label>
+                    <input type="text" id="detailTitle" class="form-control" placeholder="Enter Title" />
+                </div>
+
+                <div class="col-md-3">
+                    <label>Action Type *</label>
+                    <select id="actionType" class="form-select">
+                        <option>Select Action Type</option>
+                        <option value="1">Text</option>
+                        <option value="2">Drop-down</option>
+                        <option value="3">Date</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Select Master Name</label>
+                    <select id="masterId" class="form-select">
+                        <option>Select Master Name</option>
+                        <option value="1">Country</option>
+                        <option value="2">City</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-center mt-4">
+                    <input type="checkbox" id="inApp" class="form-check-input me-2" />
+                    <label>Is In App Visible ?</label>
+                </div>
+
+            </div>
+
+            <!-- ADD BUTTON -->
+            <button type="button" onclick="addRow()" class="btn btn-primary btn-sm mb-3">
+                ADD
+            </button>
+
+            <!-- TABLE -->
+            <div class="table-responsive">
+                <table class="table table-bordered text-center" id="dataTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                            <th>Action Type</th>
+                            <th>Master</th>
+                            <th>In App Visible</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- FOOTER BUTTONS -->
+            <div class="mt-3">
+                <button class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-success">Save & Add Another</button>
+                <a href="/Activities/Index" class="btn btn-danger">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+    let index = 0;
+
+    function addRow() {
+
+        let title = document.getElementById("detailTitle").value;
+        let actionType = document.getElementById("actionType");
+        let actionText = actionType.options[actionType.selectedIndex].text;
+
+        let master = document.getElementById("masterId");
+        let masterText = master.options[master.selectedIndex].text;
+
+        let inApp = document.getElementById("inApp").checked ? "Yes" : "No";
+
+        if (title === "") {
+            alert("Enter Title");
+            return;
+        }
+
+        let row = `
+        <tr>
+            <td>↕</td>
+
+            <td>
+                ${title}
+                <input type="hidden" name="Details[${index}].Title" value="${title}" />
+            </td>
+
+            <td>
+                ${actionText}
+                <input type="hidden" name="Details[${index}].ActionTypeId" value="${actionType.value}" />
+            </td>
+
+            <td>
+                ${masterText}
+                <input type="hidden" name="Details[${index}].PageMasterId" value="${master.value}" />
+            </td>
+
+            <td>
+                ${inApp}
+                <input type="hidden" name="Details[${index}].InAppShow" value="${inApp}" />
+            </td>
+
+            <td>
+                <input type="checkbox" /> Update Status
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('tr').remove()">
+                    Remove
+                </button>
+            </td>
+        </tr>
+        `;
+
+        document.querySelector("#dataTable tbody").insertAdjacentHTML('beforeend', row);
+
+        index++;
+
+        // clear inputs
+        document.getElementById("detailTitle").value = "";
+    }
+</script>

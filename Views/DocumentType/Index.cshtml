@@ -1,0 +1,95 @@
+﻿@model List<DocumentTypeModel>
+
+<div class="container-fluid mt-3">
+
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+            <h5 class="fw-bold mb-0">DOCUMENT TYPE</h5>
+            <small class="text-muted">Dashboard / Document Type</small>
+        </div>
+
+        <div>
+            <a href="/DocumentType/Create" class="btn btn-primary btn-sm">ADD</a>
+            <button class="btn btn-outline-primary btn-sm">Download</button>
+        </div>
+    </div>
+
+    <div class="card p-3 mb-3 shadow-sm border-0">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h6 class="mb-0">DocumentType List</h6>
+
+            <div class="d-flex align-items-center">
+                <input type="text" class="form-control form-control-sm me-2" placeholder="search" style="width:200px;" />
+
+                <span class="me-2">Show</span>
+
+                <select class="form-select form-select-sm me-2" style="width:70px;">
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+
+                <span>entries</span>
+            </div>
+
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="activity-card mb-3">
+
+            <div class="d-flex mt-3">
+
+                <div class="index-box">@item.Id</div>
+
+                <div class="flex-grow-1 ms-3">
+
+                    <div class="row">
+
+                        <div class="col-md-5">
+                            <div class="label">Title</div>
+                            <div class="value">@item.Title</div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="label">Description</div>
+                            <div class="value">@item.Description</div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="label">Status</div>
+                            <span class="@(item.StatusFlag == "A" ? "text-success" : "text-danger") fw-bold">
+                                @(item.StatusFlag == "A" ? "Active" : "Inactive")
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex gap-2">
+                        <a href="/DocumentType/Edit/@item.Id" class="btn btn-edit btn-sm">✏ Edit</a>
+
+                        @if (item.StatusFlag == "A")
+                        {
+                            <a href="/DocumentType/Toggle?id=@item.Id&status=I"
+                               class="btn btn-outline-danger btn-sm">⛔ InActive</a>
+                        }
+                        else
+                        {
+                            <a href="/DocumentType/Toggle?id=@item.Id&status=A"
+                               class="btn btn-outline-success btn-sm">✔ Active</a>
+                        }
+
+                        <a href="/DocumentType/Delete/@item.Id" class="btn btn-delete btn-sm">🗑 Delete</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>

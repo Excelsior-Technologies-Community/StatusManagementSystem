@@ -1,0 +1,110 @@
+﻿@model dynamic
+
+<div class="container-fluid mt-3">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+            <h5 class="fw-bold mb-0">ACTIVITIES</h5>
+            <small class="text-muted">Dashboard / Activities</small>
+        </div>
+
+        <div>
+            <a href="/Activities/Create" class="btn btn-primary btn-sm">ADD</a>
+            <button class="btn btn-outline-primary btn-sm">Download</button>
+        </div>
+    </div>
+
+    <!-- LIST HEADER -->
+    <div class="card p-3 mb-3 shadow-sm border-0">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h6 class="mb-0">Activities List</h6>
+
+            <div class="d-flex align-items-center">
+                <input type="text" class="form-control form-control-sm me-2" placeholder="search" style="width:200px;" />
+
+                <span class="me-2">Show</span>
+
+                <select class="form-select form-select-sm me-2" style="width:70px;">
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+
+                <span>entries</span>
+            </div>
+
+        </div>
+    </div>
+
+   
+
+    <!-- LIST -->
+    @foreach (var item in Model)
+    {
+        <div class="activity-card mb-3">
+
+            <div class="d-flex mt-5">
+
+                <!-- INDEX BOX -->
+                <div class="index-box">@item.ID</div>
+
+                <div class="flex-grow-1 ms-3">
+
+                    <div class="row">
+
+                        <!-- TITLE -->
+                        <div class="col-md-3">
+                            <div class="label">Title</div>
+                            <div class="value">@item.Title</div>
+                        </div>
+
+                        <!-- ACTION LIST -->
+                        <div class="col-md-6">
+                            <div class="label">Action List</div>
+                            <div class="value">@item.ActionList</div>
+                        </div>
+
+                        <!-- STATUS -->
+                        <div class="col-md-3">
+                            <div class="label">Status</div>
+                            <span class="@(item.StatusFlag == "Active" ? "text-success" : "text-danger") fw-bold">
+                                @item.StatusFlag
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <!-- ACTION BUTTONS -->
+                    <div class="d-flex gap-2">
+                        <a href="/Activities/Edit/@item.ID" class="btn btn-edit btn-sm">
+                            ✏ Edit
+                        </a>
+
+                        @if (item.StatusFlag == "Active")
+                        {
+                            <a href="/Activities/Toggle/@item.ID"
+                               class="btn btn-outline-danger btn-sm">⛔ InActive</a>
+                        }
+                        else
+                        {
+                            <a href="/Activities/Toggle/@item.ID"
+                               class="btn btn-outline-success btn-sm">✔ Active</a>
+                        }
+
+
+                        <a href="/Activities/Delete/@item.ID" class="btn btn-delete btn-sm">
+                            🗑 Delete
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
